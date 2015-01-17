@@ -1,0 +1,29 @@
+{
+  "name": "cozy-opener",
+  "version": "1.0.0",
+  "description": "Adds open command Cozy-Light",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "lint": "eslint ./*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maboiteaspam/cozy-opener.git"
+  },
+  "author": "maboiteaspam",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/maboiteaspam/cozy-opener/issues"
+  },
+  "homepage": "https://github.com/maboiteaspam/cozy-opener",
+  "dependencies": {
+    "is-running": "^1.0.5",
+    "opener": "^1.4.0",
+    "path-extra": "^0.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^0.11.0"
+  },
+  "displayName": "Opener"
+}
