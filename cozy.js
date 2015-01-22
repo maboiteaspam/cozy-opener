@@ -65,6 +65,7 @@ var plugin = {
     if (cozyMutex.amIMaster() ) {
       cozyMutex.remove();
     }
+    callback();
   }
 };
 
