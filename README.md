@@ -5,4 +5,4 @@ Plugin to start Cozy-light and open it in the browser.
 
 ## Install
 
-    cozy-light add-plugin maboiteaspam/cozy-opener
+    cozy-light add-plugin cozy-opener
