@@ -24,7 +24,7 @@ var plugin = {
 
           var startCozyLight = function(){
             var cozyProcess = spawn('cozy-light', ['start'],
-              {detached: true });
+              {detached: true, stdio:'inherit' });
             var pid = cozyProcess.pid;
             cozyProcess.unref();
             return pid;
