@@ -9,6 +9,15 @@ var plugin = {
       var cozyMutex = new Mutexer(cozyLight);
       var configHelpers = cozyLight.configHelpers;
       var logger = cozyLight.logger;
+
+      var exists = cozyMutex.exists();
+
+      process.on('exit', function(){
+        if (cozyMutex.amIMaster() ) {
+          cozyMutex.remove();
+        }
+      });
+
       program
         .command('open')
         .description('Starts and browse to Cozy Light')
@@ -30,7 +39,8 @@ var plugin = {
             return pid;
           };
 
-          if (cozyMutex.exists() ) {
+          if (exists ) {
+            console.error(cozyMutex.read())
             running(cozyMutex.read(), function(err, live) {
               if (err) {
                 console.error('err');
@@ -53,19 +63,11 @@ var plugin = {
             });
           } else {
             logger.info('Starting !');
-            cozyMutex.write();
-            startCozyLight();
+            cozyMutex.write(startCozyLight() );
             openBrowser();
           }
         });
     }
-  },
-  onExit: function(options, config, callback, cozyLight) {
-    var cozyMutex = new Mutexer(cozyLight);
-    if (cozyMutex.amIMaster() ) {
-      cozyMutex.remove();
-    }
-    callback();
   }
 };
 
