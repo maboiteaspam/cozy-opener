@@ -40,7 +40,6 @@ var plugin = {
           };
 
           if (exists ) {
-            console.error(cozyMutex.read())
             running(cozyMutex.read(), function(err, live) {
               if (err) {
                 console.error('err');
