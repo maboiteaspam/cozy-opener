@@ -42,8 +42,8 @@ var plugin = {
           if (exists ) {
             running(cozyMutex.read(), function(err, live) {
               if (err) {
-                console.error('err');
-                console.error(err);
+                logger.warn('err');
+                logger.warn(err);
                 return ;
               }
               if (live === false){

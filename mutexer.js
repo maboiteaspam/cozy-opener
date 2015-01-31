@@ -67,7 +67,7 @@ var Mutexer = function(cozyLight){
       try {
         process.kill(this.read(), 'SIGINT'); // can take up to ten seconds
       } catch(ex) {
-        console.error(ex);
+        //console.error(ex); // ignore it
       }
     }
     setTimeout(function(){
