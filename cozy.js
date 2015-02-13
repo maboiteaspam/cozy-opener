@@ -31,12 +31,15 @@ var plugin = {
             browser.stderr.unref();
           };
 
-          var startCozyLight = function(){
-            var cozyProcess = spawn('cozy-light', ['start'],
-              {detached: true, stdio:'inherit' });
-            var pid = cozyProcess.pid;
-            cozyProcess.unref();
-            return pid;
+          var startCozyLight = function(then){
+            var cozyProcess = spawn('cozy-light', ['start']);
+            cozyProcess.stdout.on('data', function (data) {
+              if(data.toString().match(/Cozy Light is started!/) ){
+                cozyProcess.unref();
+                if(then) then();
+              }
+            });
+            return cozyProcess.pid;
           };
 
           if (exists ) {
@@ -48,13 +51,12 @@ var plugin = {
               }
               if (live === false){
                 logger.info('Restarting !');
-                cozyMutex.write(startCozyLight() );
-                setTimeout(function(){
+                cozyMutex.write(startCozyLight(function(){
                   openBrowser();
                   /*eslint-disable */
                   process.exit(0);
                   /*eslint-enable */
-                }, 1000);
+                }) );
               } else {
                 logger.info('Already started !');
                 openBrowser();
